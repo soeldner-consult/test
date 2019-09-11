@@ -6,5 +6,5 @@
     tasks:
       - name: ensure service has state
         service:
-          name: {{ checkService }}
-          state: {{ checkState }}
+          name: "{{ checkService }}"
+          state: "{{ checkState }}"
