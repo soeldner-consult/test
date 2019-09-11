@@ -2,6 +2,9 @@
 ---
 - name: Hello World!
   hosts: all
+  remote_user: root
+  become: yes
+  become_method: sudo
  
   tasks:
  
