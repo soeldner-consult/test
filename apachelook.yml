@@ -2,7 +2,7 @@
   - name: Playbook
     hosts: webservers
     become: yes
-    become_user: root
+    become_user: ubuntu
     tasks:
       - name: ensure apache is running
         service:
