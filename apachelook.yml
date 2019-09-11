@@ -1,10 +1,10 @@
 ---
-  - name: Playbook
-    hosts: webservers
+  - name: check service
+    hosts: all
     become: yes
     become_user: ubuntu
     tasks:
-      - name: ensure apache is running
+      - name: ensure service has state
         service:
-          name: ssh
-          state: started
+          name: {{ checkService }}
+          state: {{ checkState }}
