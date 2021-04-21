@@ -1,46 +1,22 @@
-provider "vra" {
-	url = var.vra_url
-	refresh_token = var.vra_refresh_token
-	insecure = true
+provider "google" {
+  project = "t-vra-gfk-terraform"
+  region  = "europe-west3"
+  zone    = "europe-west3-c"
 }
-data "vra_zone" "this" {
-   name = var.cloud_zone
-}
-resource "vra_project" "this" {
-   name = "AK_Terraform"
-   description = "Configured by terraform"
-   administrators = ["matthias@vdi.sclabs.net"]
-    
-   zone_assignments {
-      zone_id = data.vra_zone.this.id
-   }
-}
-resource "vra_blueprint" "this" {
-   name = var.blueprint_name
-   description = "Test blueprint from terraform"
-   project_id = vra_project.this.id
-    
-   content = <<-EOT
-      name: Win2K16
-      version: 1
-      formatVersion: 1
-      resources:
-        Cloud_vSphere_Network_1:
-          type: Cloud.vSphere.Network
-          properties:
-            networkType: existing
-            constraints:
-              - tag: 'networkCategory:Production'
-        Cloud_vSphere_Machine_1:
-          type: Cloud.vSphere.Machine
-          properties:
-            image: AK-Win2k16
-            flavor: AK-Medium
-            constraints:
-              - tag: 'cloud:on-prem'
-              - tag: 'cloud:vsphere'
-            networks:
-              - network: '$${resource.Cloud_vSphere_Network_1.id}'
-                assignment: dynamic
-    EOT
+resource "google_compute_instance" "vm_instance" {
+  name         = "terraform-instance"
+  machine_type = "f1-micro"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+    }
+  }
+
+  network_interface {
+    # A default network is created for all GCP projects
+    network = "default"
+    access_config {
+    }
+  }
 }
