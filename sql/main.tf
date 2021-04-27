@@ -128,7 +128,7 @@ resource "google_sql_database" "default" {
   collation  = var.db_collation
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-
+/*
 resource "google_sql_database" "additional_databases" {
   for_each   = local.databases
   project    = "t-vra-gfk-terraform"
@@ -147,7 +147,7 @@ resource "random_id" "user-password" {
   byte_length = 8
   depends_on  = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-
+*/
 resource "google_sql_user" "default" {
   count      = var.enable_default_user ? 1 : 0
   name       = var.user_name
@@ -157,7 +157,7 @@ resource "google_sql_user" "default" {
   password   = var.user_password == "" ? random_id.user-password.hex : var.user_password
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-
+/*
 resource "google_sql_user" "additional_users" {
   for_each   = local.users
   project    = "t-vra-gfk-terraform"
@@ -167,7 +167,7 @@ resource "google_sql_user" "additional_users" {
   instance   = google_sql_database_instance.default.name
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-
+*/
 resource "null_resource" "module_depends_on" {
   triggers = {
     value = length(var.module_depends_on)
