@@ -15,12 +15,6 @@
  */
 
 
-
-variable "name" {
-  type        = string
-  description = "The name of the Cloud SQL resources"
-}
-
 variable "random_instance_name" {
   type        = bool
   description = "Sets random suffix at the end of the Cloud SQL resource name"
