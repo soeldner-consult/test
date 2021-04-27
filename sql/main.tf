@@ -40,8 +40,8 @@ resource "random_id" "suffix" {
 }
 
 resource "google_sql_database_instance" "default" {
-  provider            = google-beta
-  project             = var.project_id
+  provider            = google
+  project             = "t-vra-gfk-terraform"
   name                = local.master_instance_name
   database_version    = "MYSQL_5_7"
   region              = "europe-west3"
