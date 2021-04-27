@@ -23,9 +23,9 @@ locals {
 resource "google_sql_database_instance" "replicas" {
   for_each             = local.replicas
   project              = var.project_id
-  name                 = "${local.master_instance_name}-replica${var.read_replica_name_suffix}${each.value.name}"
+  name                 = "testdb-replica${var.read_replica_name_suffix}${each.value.name}"
   database_version     = var.database_version
-  region               = join("-", slice(split("-", lookup(each.value, "zone", var.zone)), 0, 2))
+  region               = join("-", slice(split("-", lookup(each.value, "zone", "europe-west3-c")), 0, 2))
   master_instance_name = google_sql_database_instance.default.name
   deletion_protection  = var.read_replica_deletion_protection
 
@@ -70,7 +70,7 @@ resource "google_sql_database_instance" "replicas" {
     }
 
     location_preference {
-      zone = lookup(each.value, "zone", var.zone)
+      zone = lookup(each.value, "zone", "europe-west3-c")
     }
 
   }
