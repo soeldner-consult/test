@@ -122,7 +122,7 @@ resource "google_sql_database_instance" "default" {
 resource "google_sql_database" "default" {
   count      = var.enable_default_db ? 1 : 0
   name       = var.db_name
-  project    = var.project_id
+  project    = "t-vra-gfk-terraform"
   instance   = google_sql_database_instance.default.name
   charset    = var.db_charset
   collation  = var.db_collation
@@ -131,7 +131,7 @@ resource "google_sql_database" "default" {
 
 resource "google_sql_database" "additional_databases" {
   for_each   = local.databases
-  project    = var.project_id
+  project    = "t-vra-gfk-terraform"
   name       = each.value.name
   charset    = lookup(each.value, "charset", null)
   collation  = lookup(each.value, "collation", null)
@@ -151,7 +151,7 @@ resource "random_id" "user-password" {
 resource "google_sql_user" "default" {
   count      = var.enable_default_user ? 1 : 0
   name       = var.user_name
-  project    = var.project_id
+  project    = "t-vra-gfk-terraform"
   instance   = google_sql_database_instance.default.name
   host       = var.user_host
   password   = var.user_password == "" ? random_id.user-password.hex : var.user_password
@@ -160,7 +160,7 @@ resource "google_sql_user" "default" {
 
 resource "google_sql_user" "additional_users" {
   for_each   = local.users
-  project    = var.project_id
+  project    = "t-vra-gfk-terraform"
   name       = each.value.name
   password   = lookup(each.value, "password", random_id.user-password.hex)
   host       = lookup(each.value, "host", var.user_host)
