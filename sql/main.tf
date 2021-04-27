@@ -43,7 +43,7 @@ resource "google_sql_database_instance" "default" {
   provider            = google-beta
   project             = var.project_id
   name                = local.master_instance_name
-  database_version    = "MYSQL_8"
+  database_version    = "MYSQL_5_7"
   region              = "europe-west3"
   encryption_key_name = var.encryption_key_name
   deletion_protection = var.deletion_protection
