@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/*
 locals {
   replicas = {
     for x in var.read_replicas : "testdb-replica${var.read_replica_name_suffix}${x.name}" => x
@@ -89,3 +89,4 @@ resource "google_sql_database_instance" "replicas" {
     delete = var.delete_timeout
   }
 }
+  */
