@@ -13,7 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/*
+ 
+ resource "google_sql_database" "default" {
+  count      = 1
+  name       = "testdb2"
+  project    = "t-vra-gfk-terraform"
+  instance   = "testdb2"
+  charset    = var.db_charset
+  collation  = var.db_collation
+  
+}
+   
+ /*  
 locals {
 
 
@@ -128,7 +140,7 @@ resource "google_sql_database" "default" {
   collation  = var.db_collation
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-/*
+
 resource "google_sql_database" "additional_databases" {
   for_each   = local.databases
   project    = "t-vra-gfk-terraform"
@@ -138,7 +150,7 @@ resource "google_sql_database" "additional_databases" {
   instance   = google_sql_database_instance.default.name
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-*/
+
 resource "random_id" "user-password" {
   keepers = {
     name = google_sql_database_instance.default.name
@@ -157,7 +169,7 @@ resource "google_sql_user" "default" {
   password   = var.user_password == "" ? random_id.user-password.hex : var.user_password
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-/*
+
 resource "google_sql_user" "additional_users" {
   for_each   = local.users
   project    = "t-vra-gfk-terraform"
@@ -167,9 +179,10 @@ resource "google_sql_user" "additional_users" {
   instance   = google_sql_database_instance.default.name
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-*/
+
 resource "null_resource" "module_depends_on" {
   triggers = {
     value = length(var.module_depends_on)
   }
 }
+*/
