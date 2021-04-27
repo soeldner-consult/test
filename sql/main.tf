@@ -45,7 +45,6 @@ resource "google_sql_database_instance" "default" {
   name                = "testdb"
   database_version    = "MYSQL_5_7"
   region              = "europe-west3"
-  encryption_key_name = var.encryption_key_name
   deletion_protection = var.deletion_protection
 
   settings {
