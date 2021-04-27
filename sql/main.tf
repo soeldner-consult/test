@@ -42,7 +42,7 @@ resource "random_id" "suffix" {
 resource "google_sql_database_instance" "default" {
   provider            = google
   project             = "t-vra-gfk-terraform"
-  name                = local.master_instance_name
+  name                = "testdb"
   database_version    = "MYSQL_5_7"
   region              = "europe-west3"
   encryption_key_name = var.encryption_key_name
