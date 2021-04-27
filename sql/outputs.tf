@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/*
 // Master
 output "instance_name" {
   value       = google_sql_database_instance.default.name
@@ -117,3 +117,4 @@ output "instances" {
   value       = concat([google_sql_database_instance.default], values(google_sql_database_instance.replicas))
   description = "A list of all `google_sql_database_instance` resources we've created"
 }
+*/
