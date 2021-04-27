@@ -138,7 +138,7 @@ resource "google_sql_database" "additional_databases" {
   instance   = google_sql_database_instance.default.name
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-
+*/
 resource "random_id" "user-password" {
   keepers = {
     name = google_sql_database_instance.default.name
@@ -147,7 +147,7 @@ resource "random_id" "user-password" {
   byte_length = 8
   depends_on  = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-*/
+
 resource "google_sql_user" "default" {
   count      = var.enable_default_user ? 1 : 0
   name       = var.user_name
