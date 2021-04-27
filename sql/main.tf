@@ -43,8 +43,8 @@ resource "google_sql_database_instance" "default" {
   provider            = google-beta
   project             = var.project_id
   name                = local.master_instance_name
-  database_version    = var.database_version
-  region              = var.region
+  database_version    = "MYSQL_8"
+  region              = "europe-west3"
   encryption_key_name = var.encryption_key_name
   deletion_protection = var.deletion_protection
 
@@ -95,7 +95,7 @@ resource "google_sql_database_instance" "default" {
     }
 
     location_preference {
-      zone = var.zone
+      zone = "europe-west3-c"
     }
 
     maintenance_window {
